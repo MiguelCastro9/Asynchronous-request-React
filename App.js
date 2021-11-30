@@ -1,30 +1,25 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Modal, Pressable, Image, FlatList, TextInput } from 'react-native';
+import { Text, View, StyleSheet, Modal, Pressable, Image, FlatList, TextInput, Button } from 'react-native';
 import Constants from 'expo-constants';
-
-// You can import from local files
-import AssetExample from './components/AssetExample';
-
-// or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
 
 const ShowDetalhes = ({display, toogleModal, hp, attack, defense, name}) => (   
     <Modal
-          animationType="fade"
+          animationType="slide"
           transparent={true}
           visible={display}
-          onRequestClose={toogleModal}
-    >
+          onRequestClose={toogleModal}>
 
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-                <Pressable onPress={toogleModal}>
-                  <Text>{name}</Text>
-                  <Text>.</Text>
-                  <Text>HP: {hp}</Text>
-                  <Text>Attack: {attack}</Text>
-                  <Text>Defense: {defense}</Text>
-                </Pressable>
+              <Pressable onPress={toogleModal}>
+
+                <Text>{name} {'\n\n'}</Text>
+
+                <Text> HP: {hp}</Text>
+                <Text> Attack: {attack}</Text>
+                <Text> Defense: {defense}</Text>
+            </Pressable>
           </View>
         </View>
     
@@ -32,16 +27,14 @@ const ShowDetalhes = ({display, toogleModal, hp, attack, defense, name}) => (
         
  )
 
-const Pokemon = ({name, link}) => {
+const Pokemon = ({name, link, hp, attack, defense}) => {
   const [modal, setModal] = React.useState(false)
 
   function mudaModal(){
     setModal(!modal)
   }
 
-  var hp = 'aa';
-  var attack = 'bb';
-  var defense = 'cc';
+
 
   return (
     <View>
@@ -98,7 +91,9 @@ export default function App() {
     id = idPokemon;
   }
 
-  executeGet("https://pokeapi.co/api/v2/pokemon/"+id,setJsonData)
+  function pokemonFunction() {
+    executeGet("https://pokeapi.co/api/v2/pokemon/"+id,setJsonData);
+  }
 
   //função que renderiza cada item do FlatList
   function meuItem({item}){
@@ -106,6 +101,9 @@ export default function App() {
       <Pokemon 
         name={item.name}
         link={item.sprites.front_default}
+        hp = {item.stats[0].base_stat}
+        attack = {item.stats[1].base_stat}
+        defense = {item.stats[2].base_stat}
       />
     )
   }
@@ -113,16 +111,18 @@ export default function App() {
   return (
 
     <View style={styles.container}>
-  
-
+ 
       <TextInput
         style={styles.input}
         onChangeText={setIdPokemon}
         value={idPokemon}
-        placeholder = "Informe o nome do Pokemon..."
-        placeholderTextColor = "white"
+        placeholder = "Digite o ID ou nome do Pokemon"
       />
-  
+
+      <Text><i>Para mais informações clique no Pokemon.</i></Text>
+
+      <Button color="#801F14" title="Buscar" onPress={() => pokemonFunction()} />
+
       <FlatList
         data={jsonData}
         renderItem={meuItem}
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#4682B4',
+    backgroundColor: '#ff000082',
     padding: 8,
   },
   paragraph: {
@@ -177,10 +177,17 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   input: {
-    color: 'white',
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  bottonLine: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  },
+  caixaTextStatusPokemon: {
+    display: 'inline',
+    alignItems: "center",
   },
 });
