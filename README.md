@@ -1,4 +1,4 @@
-# O projeto
+# The project
 
 GET request (api - https://pokeapi.co/api/v2/pokemon/) with the iterative button, bringing back the "Pokemons" with their respective data asynchronously.
 
