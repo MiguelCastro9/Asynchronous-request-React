@@ -1,12 +1,10 @@
-# Andamento do projeto
+# O projeto
 
-Integrantes: Arthur Dias, Felipe Ferreira, Miguel Castro, Victor Vilela e Yuri Neves
+GET request (api - https://pokeapi.co/api/v2/pokemon/) with the iterative button, bringing back the "Pokemons" with their respective data asynchronously.
 
-Tecnologias utilizadas: React Native e Requisição assíncrona
+Technologies used: React Native and Asynchronous Request
 
-Para executar a aplicação pasta executar o código fonte no site https://snack.expo.dev/ ou em IDEs
-
-Realizamos a criação da interface visual e a requisição GET (api - https://pokeapi.co/api/v2/pokemon/) com o botão iterativo, nos trazendo como retorno os "Pokémons" com seus respectivos dados de forma assíncrona.
+To run the folder application run the source code on the website https://snack.expo.dev/ or in IDEs
 
 ![image](https://user-images.githubusercontent.com/56695817/143968356-540d71cc-ad08-4a16-a6b2-ffcf03ca7edc.png)
 
